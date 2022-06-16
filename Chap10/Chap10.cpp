@@ -46,7 +46,8 @@ void elimDups(vector<string>& words)
     }
 }
 
-void print_vector_string(vector<string>& words)
+template <typename T>
+void print_vector(vector<T>& words)
 {
     for (const auto& word : words)
     {
@@ -59,11 +60,39 @@ void print_vector_string(vector<string>& words)
  {
      vector<string> vec = {"the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"};
      cout << "Before: ";
-     print_vector_string(vec);
+     print_vector(vec);
      elimDups(vec);
-     stable_sort(vec.begin(),vec.end(),isShorter);
+     stable_sort(vec.begin(),vec.end(),isShorter); // isShorter叫做comparison function object which returns ​true if the first argument is less than (i.e. is ordered before) the second. 就是用来自定义排序的定义的
      cout << "After: ";
-     print_vector_string(vec);
+     print_vector(vec);
+ }
+
+ void page353()
+ {
+     int i = 1;
+     auto bbb = [](int i) {
+         if (i > 0) {
+             return i;
+         }
+         return -i;
+
+     };
+
+     std::vector<int> vi = { -1, 0, 3, 5, -3 };
+     print_vector(vi);
+     //std::transform(vi.begin(), vi.end(), vi.begin(), bbb); // the same as below but better accords to the original text
+     std::transform(vi.begin(), vi.end(), vi.begin(), [](int i) {
+         if (i > 0) {
+             return i;
+         }
+         return -i;
+         });
+     print_vector(vi);
+ }
+
+ void exercise10_13() 
+ {
+     return;
  }
 
 int main()
@@ -71,7 +100,15 @@ int main()
     std::cout << "Hello World!\n";
     //page341();
     //exercise10_11();
-    /* lambda */
+    //page353();
+    //exercise10_13();
+    //exercise10_16();
+    //exercise10_19();
+    /* lambda
+    * 我对lambda捕获列表的理解：lambda相当于一个类，lambda函数就是一个lambda对象。对于局部(当前函数所在的scope)non-static变量不能直接访问，需要通过捕获列表[]将其放进lambda类中，成为this->var （实际使用上没这么复杂，只用于理解捕获列表），不然就不能访问
+    * lambda的形参列表就是普通类内member method的形参列表。这个理解是正确的，因为chap10.3.3就这么说了。。。
+    */
+    
     
 }
 
