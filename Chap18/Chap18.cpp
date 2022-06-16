@@ -1,8 +1,12 @@
 ﻿#include <iostream>
 #include <vector>
+<<<<<<< HEAD
 using namespace std;
 struct Base1 
 {
+=======
+struct Base1 {
+>>>>>>> b9f4c3c79dde6f3676f28321c94e9bdbc36cce34
     void print(int) const 
     {
         std::cout << "Base1 Print Used" << std::endl;
@@ -46,6 +50,7 @@ struct MI : public Derived, public Base2
     //    Base1::print(x);
     //}
     // 解决方案2：使用using声明，在使用MI的对象时显式指出是使用间接基类Base1的函数。
+<<<<<<< HEAD
     using Base1::print;
 protected:
     int* ival;
@@ -71,11 +76,26 @@ void MI::foo(double cval)
 }
 
 void main()
+=======
+    //using Base1::print;
+protected:
+    int* ival;
+    std::vector<double> dvec;
+};
+
+using namespace std;
+
+int main()
+>>>>>>> b9f4c3c79dde6f3676f28321c94e9bdbc36cce34
 {
     MI mi;
     mi.print(42);
     // 解决方案3：加上前缀限定符
     mi.Base1::print(42);
+<<<<<<< HEAD
+=======
+    return 0;
+>>>>>>> b9f4c3c79dde6f3676f28321c94e9bdbc36cce34
 }
 
 /*分析
@@ -83,6 +103,9 @@ void main()
 * 如果类MI注释掉line 40，那么出错的原因则为二义性。先查找到Derived(string)，发现无法将int转换为string。继续向上查找，产生了二义性。
 * 即：形参列表无论是否相同，多重继承都可能产生二义性。即使只在一个基类中是Public，其他基类是private，也可能出错。
 * 最好的解决方案：在Derived中定义自己的新版本。
+<<<<<<< HEAD
 */
 /*Exercise18.28题点也相似， foo虽然在Derived1和Derived2中形参列表不一样，但由于VMI没有定义自己的foo，故向上搜寻时会出现二义性。
+=======
+>>>>>>> b9f4c3c79dde6f3676f28321c94e9bdbc36cce34
 */
